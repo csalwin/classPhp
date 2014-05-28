@@ -28,7 +28,16 @@ class BaseController {
         }
 
         $data = new BaseModel();
+        if(isset($_GET['category'])){
+            $data->createCategory($_GET['category']);
+        }
+        if(isset($_GET['locations'])){
+            $data->createLocations($_GET['locations']);
+        }
         $this->categories = $data->reviewCategory();
+
+        $this->locations = $data->reviewLocations();
+
 
 
 

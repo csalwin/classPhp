@@ -20,15 +20,37 @@ class BaseModel {
 
         }
     }
-    public function createCategory(){
-
+    public function createCategory($category){
+        $sql = 'INSERT INTO categories (category) VALUES (:category)';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':category',$category);
+        $stmt->execute();
+        return;
 
     }
+
+    public function createLocations($locations){
+        $sql = 'INSERT INTO location (locations) VALUES (:locations)';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':locations',$locations);
+        $stmt->execute();
+        return;
+    }
     public function reviewCategory(){
-        $sql = 'SELECT * FROM categories ';
+        $sql = 'SELECT * FROM categories';
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
+
+        return $result;
+
+    }
+    public function reviewLocations(){
+        $sql = 'SELECT * FROM location';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
         return $result;
 
     }
